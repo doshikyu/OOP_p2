@@ -1,6 +1,8 @@
 public class ServiceStation {
     public void check(Vehicle vehicle) {
-        if (vehicle == null) return;
+        if (vehicle == null || vehicle.getModelName() == null) {
+            return;
+        }
         proceedTyreService(vehicle);
         if (vehicle.getClass() == Car.class) {
             Car car = (Car) vehicle;
@@ -14,6 +16,9 @@ public class ServiceStation {
 
     private static void proceedTyreService(Vehicle vehicle) {
         System.out.println("Обслуживаем " + vehicle.getModelName());
+        if (vehicle.getWheelsCount() == 0) {
+            System.out.println("У этого транспортного средства нет колёс...");
+        }
         for (int i = 0; i < vehicle.getWheelsCount(); i++) {
             vehicle.updateTyre();
         }
