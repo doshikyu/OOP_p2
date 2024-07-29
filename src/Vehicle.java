@@ -1,8 +1,6 @@
-public abstract class Vehicle {
-    private String modelName;
-    private int wheelsCount;
-
-    public Vehicle() {}
+public abstract class Vehicle implements Serviceable {
+    private final String modelName;
+    private final int wheelsCount;
 
     public Vehicle(String modelName, int wheelsCount) {
         this.modelName = modelName;
@@ -13,19 +11,24 @@ public abstract class Vehicle {
         return modelName;
     }
 
-    public void setModelName(String modelName) {
-        this.modelName = modelName;
-    }
-
     public int getWheelsCount() {
         return wheelsCount;
-    }
-
-    public void setWheelsCount(int wheelsCount) {
-        this.wheelsCount = wheelsCount;
     }
 
     public void updateTyre() {
         System.out.println("Меняем покрышку");
     }
+
+    @Override
+    public void check(){
+        System.out.println("Обслуживаем " + getModelName());
+        if (getWheelsCount() == 0) {
+            System.out.println("У этого транспортного средства нет колёс...");
+            return;
+        }
+        for (int i = 0; i < wheelsCount; i++){
+            updateTyre();
+        }
+    }
+
 }
